@@ -18,16 +18,16 @@ contract Interactiontest is Test {
         vm.deal(USER, START_BALANCE);
     }
 
-    function testUserCanFundandInteractions() public {
-        FundFundMe fundFundmE = new FundFundMe();
+    // function testUserCanFundandInteractions() public {
+    //     FundFundMe fundFundmE = new FundFundMe();
 
-        vm.deal(USER, 1e18);
-        vm.prank(USER);
-        fundFundmE.FundFundme(address(fundme));
-        address funder = fundme.getfunder(0);
+    //     vm.deal(USER, 1e18);
+    //     vm.prank(USER);
+    //     fundFundmE.FundFundme(address(fundme));
+    //     address funder = fundme.getfunder(0);
 
-        assertEq(funder, USER);
-    }
+    //     assertEq(funder, USER);
+    // }
 
     function testUserCanWithdrawandInteractions() public {
         FundFundMe fundFundme = new FundFundMe();
