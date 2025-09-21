@@ -1,4 +1,3 @@
-
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
@@ -15,9 +14,10 @@ contract FundMe {
     address[] private s_funders;
 
     // Could we make this constant?  /* hint: no! We should make it immutable! */
-    address private  immutable i_owner;
+    address private immutable i_owner;
     uint256 public constant MINIMUM_USD = 5 * 10 ** 18;
-AggregatorV3Interface private s_pricefeed;
+    AggregatorV3Interface private s_pricefeed;
+
     constructor(address priceFeed) {
         i_owner = msg.sender;
         s_pricefeed = AggregatorV3Interface(priceFeed);
@@ -39,20 +39,17 @@ AggregatorV3Interface private s_pricefeed;
         if (msg.sender != i_owner) revert Fundme_NotOwner();
         _;
     }
+
     function cheaperWithdraw() public onlyOwner {
-     uint256 fundersLenght = s_funders.length;
-     for (uint256 funderIndex =  0 ;funderIndex < fundersLenght;funderIndex++){
-             address funder = s_funders[funderIndex];
+        uint256 fundersLenght = s_funders.length;
+        for (uint256 funderIndex = 0; funderIndex < fundersLenght; funderIndex++) {
+            address funder = s_funders[funderIndex];
             s_addressToAmountFunded[funder] = 0;
         }
-         s_funders = new address[](0);
-            (bool callSuccess,) = payable(msg.sender).call{value: address(this).balance}("");
+        s_funders = new address[](0);
+        (bool callSuccess,) = payable(msg.sender).call{value: address(this).balance}("");
         require(callSuccess, "Call failed");
-    
-
-     }
-    
-
+    }
 
     function withdraw() public onlyOwner {
         for (uint256 funderIndex = 0; funderIndex < s_funders.length; funderIndex++) {
@@ -91,17 +88,17 @@ AggregatorV3Interface private s_pricefeed;
         fund();
     }
     //view/pure function;
-    function getAddesstoAmoundfunded (address fundingAddress) external view returns(uint256){
-   return s_addressToAmountFunded[fundingAddress];
 
+    function getAddesstoAmoundfunded(address fundingAddress) external view returns (uint256) {
+        return s_addressToAmountFunded[fundingAddress];
     }
-    function getfunder(uint256 index) external view returns(address) {
-return s_funders[index];
 
+    function getfunder(uint256 index) external view returns (address) {
+        return s_funders[index];
     }
-    function getOwner() external view returns(address){
 
-return i_owner;
+    function getOwner() external view returns (address) {
+        return i_owner;
     }
 }
 

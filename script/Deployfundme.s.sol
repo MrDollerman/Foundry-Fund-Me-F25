@@ -3,10 +3,10 @@ pragma solidity ^0.8.18;
 
 import {Script} from "forge-std/Script.sol";
 import {FundMe} from "../src/Fundme.sol";
-import{Helperconfig} from "./HelperConfig.s.sol";
+import {Helperconfig} from "./HelperConfig.s.sol";
 
 contract deployfundme is Script {
-    function run() external returns (FundMe) { 
+    function run() external returns (FundMe) {
         Helperconfig helperconfig = new Helperconfig();
         address ethusdpriceFeed = helperconfig.activeNetworkConfig();
         vm.startBroadcast();
@@ -14,4 +14,4 @@ contract deployfundme is Script {
         vm.stopBroadcast();
         return fundme;
     }
-} 
+}

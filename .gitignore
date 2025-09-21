@@ -16,5 +16,3 @@ docs/
 zkout/
 lib/
 broadcast/
-echo ".gitignore" >> ~/.gitignore_global
-git config --global core.excludesfile ~/.gitignore_global
